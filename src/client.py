@@ -3,12 +3,12 @@ import json
 import inspect
 from threading import Thread
 
-class RPCClient:
-    def __init__(self, host:str='localhost', port:int=8080) -> None:
+
+class Client:
+    def __init__(self, host: str = 'localhost', port: int = 8080) -> None:
         self.__sock = None
         self.SIZE = 1024
         self.__address = (host, port)
-
 
     def isConnected(self):
         try:
@@ -19,7 +19,6 @@ class RPCClient:
         except:
             return False
 
-
     def connect(self):
         try:
             self.__sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -27,22 +26,21 @@ class RPCClient:
         except EOFError as e:
             print(e)
             raise Exception('Client was not able to connect.')
-    
+
     def disconnect(self):
         try:
             self.__sock.close()
         except:
             pass
 
-
     def __getattr__(self, __name: str):
         def excecute(*args, **kwargs):
             self.__sock.sendall(json.dumps((__name, args, kwargs)).encode())
 
             response = json.loads(self.__sock.recv(self.SIZE).decode())
-   
+
             return response
-        
+
         return excecute
 
     def __del__(self):
