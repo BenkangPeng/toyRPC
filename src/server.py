@@ -17,6 +17,7 @@ class Server:
         self.address = (host, port)
         self.methods = {}
 
+    # TODO @BenkangPeng Use decorator instead to register Method.
     def registerMethod(self, function) -> None:
         try:
             self.methods.update({function.__name__: function})
@@ -24,11 +25,12 @@ class Server:
             raise Exception(
                 'A non function object has been passed into Server.registerMethod(self, function)')
 
+    # TODO @BenkangPeng Use decroate instead to register Instance.
     def registerInstance(self, instance=None) -> None:
         try:
             # Regestring the instance's methods
             for functionName, function in inspect.getmembers(instance, predicate=inspect.ismethod):
-                if not functionName.startswith('__'):
+                if not functionName.startswith('__'):#except for the non-special functions
                     self.methods.update({functionName: function})
         except:
             raise Exception(
@@ -63,7 +65,7 @@ class Server:
             sock.bind(self.address)
             sock.listen()
 
-            print(f'+ Server {self.address} running')
+            print(f'🔍Server {self.address} running')
             while True:
                 try:
                     client, address = sock.accept()
