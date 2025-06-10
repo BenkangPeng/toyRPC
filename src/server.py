@@ -1,23 +1,28 @@
 import json
 import socket
 import inspect
-from threading import Thread
+from threading import Thread, Lock
 
 
 class Server:
+
+    # the singleton instance
+    _instance = None
+    _lock = Lock()
+
     def __init__(self, host: str = '0.0.0.0', port: int = 8080):
         self.host = host
         self.port = port
         self.SIZE = 1024
         self.address = (host, port)
-        self.method = {}
+        self.methods = {}
 
     def registerMethod(self, function) -> None:
         try:
             self.methods.update({function.__name__: function})
         except:
             raise Exception(
-                'A non function object has been passed into RPCServer.registerMethod(self, function)')
+                'A non function object has been passed into Server.registerMethod(self, function)')
 
     def registerInstance(self, instance=None) -> None:
         try:
@@ -72,5 +77,7 @@ class Server:
     @classmethod
     def instance(cls):
         if cls._instance is None:
-            cls._instance = cls()
+            with cls._lock:
+                if cls._instance is None:
+                    cls._instance = cls()
         return cls._instance
