@@ -72,6 +72,7 @@ class Server:
                     Thread(target=self.__handle__, args=[
                            client, address]).start()
 
+                # BUG @BenkangPeng can't interrupt the process in fact.
                 except KeyboardInterrupt:
                     print(f'- Server {self.address} interrupted')
                     break

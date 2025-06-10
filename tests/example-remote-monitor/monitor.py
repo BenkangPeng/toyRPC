@@ -3,9 +3,8 @@ from src.client import Client
 consumer = Client('localhost', 8080)
 consumer.connect()
 
-print(consumer.add(20,20))
-print(consumer.sub(40,20))
-print(consumer.mul(20,20))
-print(consumer.div(40,20))
+print(consumer.get_cpu_usage())
+print(consumer.get_memory_usage())
+print(consumer.get_disk_usage())
 
 consumer.disconnect()
