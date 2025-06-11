@@ -30,7 +30,8 @@ class Server:
         try:
             # Regestring the instance's methods
             for functionName, function in inspect.getmembers(instance, predicate=inspect.ismethod):
-                if not functionName.startswith('__'):#except for the non-special functions
+                # except for the non-special functions
+                if not functionName.startswith('__'):
                     self.methods.update({functionName: function})
         except:
             raise Exception(
@@ -73,7 +74,7 @@ class Server:
                         client, address = sock.accept()
                     except socket.timeout:
                         continue
-                    
+
                     Thread(target=self.__handle__, args=[
                            client, address]).start()
 
@@ -89,3 +90,6 @@ class Server:
                 if cls._instance is None:
                     cls._instance = cls()
         return cls._instance
+
+    def getMethods(self):
+        return self.methods
