@@ -63,12 +63,17 @@ class Server:
     def run(self) -> None:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             sock.bind(self.address)
+            sock.settimeout(1)
             sock.listen()
 
             print(f'🔍Server {self.address} running')
             while True:
                 try:
-                    client, address = sock.accept()
+                    try:
+                        client, address = sock.accept()
+                    except socket.timeout:
+                        continue
+                    
                     Thread(target=self.__handle__, args=[
                            client, address]).start()
 
