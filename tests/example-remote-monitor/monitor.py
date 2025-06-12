@@ -1,4 +1,4 @@
-from src.client import Client
+from python.client import Client
 
 consumer = Client('localhost', 8080)
 consumer.connect()

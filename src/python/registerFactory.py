@@ -6,8 +6,8 @@
 # _server.run()
 
 import psutil
-from src.register import registerMethod, registerInstance
-from src.server import Server
+from python.register import registerMethod, registerInstance
+from python.server import Server
 
 
 @registerInstance

@@ -1,4 +1,4 @@
-from src.server import Server
+from python.server import Server
 
 s1 = Server.instance()
 s2 = Server.instance()

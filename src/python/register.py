@@ -1,4 +1,4 @@
-from src.server import Server
+from python.server import Server
 
 def registerMethod(func):
     Server.instance().registerMethod(func)
