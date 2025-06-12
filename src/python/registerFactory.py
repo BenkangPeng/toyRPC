@@ -8,6 +8,7 @@
 import psutil
 from python.register import registerMethod, registerInstance
 from python.server import Server
+import cc.functions as func
 
 
 @registerInstance
@@ -46,3 +47,11 @@ def listAllMethods():
         res.append(f'{name} : {func}')
 
     return res
+
+@registerMethod
+def getNPrimes(n):
+    return func.getNPrimes(n)
+
+@registerMethod
+def getNFibonacci(n):
+    return func.getNFibonacci(n)

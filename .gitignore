@@ -1,2 +1,3 @@
 */**/__pycache__
 cython_test/
+src/cc/functions.cpp
