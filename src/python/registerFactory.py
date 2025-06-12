@@ -55,3 +55,7 @@ def getNPrimes(n):
 @registerMethod
 def getNFibonacci(n):
     return func.getNFibonacci(n)
+
+@registerMethod
+def matMul(A, B):
+    return func.matMul(A, B)

@@ -1,8 +1,7 @@
 # distutils: language=c++
 
 from libcpp.vector cimport vector
-from functions cimport prim
-from functions cimport fib
+from functions cimport prim, fib, matrixMul
 
 
 def getNPrimes(int n):
@@ -25,4 +24,11 @@ def getNFibonacci(int n):
     """
 
     cdef vector[int] res = fib(n)
+    return res
+
+def matMul(vector[vector[int]]& A, vector[vector[int]]& B):
+    """
+    Multiply two matrices.
+    """
+    cdef vector[vector[int]] res = matrixMul(A, B)
     return res

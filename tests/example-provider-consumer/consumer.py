@@ -13,6 +13,10 @@ print(consumer.div(40,20))
 
 print(consumer.getPrimes(10))
 
-print(consumer.getNPrimes(30))
-print(consumer.getNFibonacci(30))
+print(consumer.getNPrimes(10))
+print(consumer.getNFibonacci(10))
+
+A = [[1,2],[3,4]]
+B = [[5,6],[7,8]]
+print(consumer.matMul(A,B))
 consumer.disconnect()
