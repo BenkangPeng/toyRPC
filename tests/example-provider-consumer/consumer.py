@@ -11,7 +11,6 @@ print(consumer.div(40,20))
 # BUG : listAllMethods() is not working
 # print(consumer.listAllMethods())
 
-print(consumer.getPrimes(10))
 
 print(consumer.getNPrimes(10))
 print(consumer.getNFibonacci(10))

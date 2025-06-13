@@ -1,5 +1,6 @@
 #include "functions.hpp"
 #include <stdexcept>
+#include <vector>
 std::vector<int> prim(int n) {
   if (n <= 0)
     return {};
@@ -42,9 +43,8 @@ std::vector<int> fib(int n) {
   return res;
 }
 
-std::vector<std::vector<int>>
-matrixMul(std::vector<std::vector<int>> &A,
-          std::vector<std::vector<int>> &B) {
+std::vector<std::vector<int>> matmul(std::vector<std::vector<int>> &A,
+                                     std::vector<std::vector<int>> &B) {
   if (A.empty() || B.empty() || A[0].size() != B.size()) {
     throw std::invalid_argument(
         "Invalid matrix dimensions for multiplication.");
@@ -56,6 +56,44 @@ matrixMul(std::vector<std::vector<int>> &A,
       for (int k = 0; k < B.size(); ++k) {
         res[i][j] += A[i][k] * B[k][j];
       }
+    }
+  }
+  return res;
+}
+
+std::vector<std::vector<int>> matrix::mul(std::vector<std::vector<int>> &A,
+                                          std::vector<std::vector<int>> &B) {
+  if (A.empty() || B.empty() || A[0].size() != B.size()) {
+    throw std::invalid_argument(
+        "Invalid matrix dimensions for multiplication.");
+  }
+  std::vector<std::vector<int>> res(A.size(), std::vector<int>(B[0].size(), 0));
+
+  for (int i = 0; i < A.size(); ++i) {
+    for (int j = 0; j < B[0].size(); ++j) {
+      for (int k = 0; k < B.size(); ++k) {
+        res[i][j] += A[i][k] * B[k][j];
+      }
+    }
+  }
+
+  return res;
+}
+
+matrix::matrix() {}
+
+std::vector<std::vector<int>>
+matrix::transpose(std::vector<std::vector<int>> &A) {
+  if (A.empty()) {
+    throw std::invalid_argument("Invalid matrix dimensions for transpose.");
+  }
+  int row = A.size();
+  int col = A[0].size();
+  std::vector<std::vector<int>> res(col, std::vector<int>(row, 0));
+
+  for (int i = 0; i < row; ++i) {
+    for (int j = 0; j < col; ++j) {
+      res[j][i] = A[i][j];
     }
   }
 
