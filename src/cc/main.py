@@ -9,3 +9,4 @@ print(functions.matMul(A,B))
 
 M = functions.PyMatrix()
 print(M.mul(A,B))
+print(M.transpose(A))

@@ -1,6 +1,5 @@
 #include "functions.hpp"
 #include <stdexcept>
-#include <vector>
 std::vector<int> prim(int n) {
   if (n <= 0)
     return {};
