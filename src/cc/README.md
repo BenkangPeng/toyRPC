@@ -295,3 +295,8 @@ transposed = matrix.transpose(A)
    - Write unit tests for both C++ and Python interfaces
    - Test edge cases and error conditions
    - Verify memory management
+
+|      |      |      |      |
+| ---- | ---- | ---- | ---- |
+|      |      |      |      |
+
