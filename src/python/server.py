@@ -38,17 +38,17 @@ class Server:
                 'A non class object has been passed into RPCServer.registerInstance(self, instance)')
 
     def __handle__(self, client: socket.socket, address: tuple) -> None:
-        print(f'Managing requests from {address}.')
+        print(f'🔗 Managing requests from {address}.')
         while True:
             try:
                 functionName, args, kwargs = json.loads(
                     client.recv(self.SIZE).decode())
             except:
-                print(f'! Client {address} disconnected.')
+                print(f'❌ Client {address} disconnected.')
                 break
 
             # Showing request Type
-            print(f'> {address} : {functionName}({args})')
+            print(f'➡️  {address} : {functionName}({args})')
 
             try:
                 response = self.methods[functionName](*args, **kwargs)
@@ -58,16 +58,16 @@ class Server:
             else:
                 client.sendall(json.dumps(response).encode())
 
-        print(f'Completed requests from {address}.')
+        print(f'🎉 Completed requests from {address}.')
         client.close()
 
     def run(self) -> None:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             sock.bind(self.address)
-            sock.settimeout(1)
+            sock.settimeout(0.2)
             sock.listen()
 
-            print(f'🔍Server {self.address} running')
+            print(f'🔍 Server {self.address} running')
             while True:
                 try:
                     try:
@@ -80,7 +80,7 @@ class Server:
 
                 # BUG @BenkangPeng can't interrupt the process in fact.
                 except KeyboardInterrupt:
-                    print(f'- Server {self.address} interrupted')
+                    print(f'❌ Server {self.address} interrupted')
                     break
 
     @classmethod

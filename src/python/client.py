@@ -25,7 +25,7 @@ class Client:
             self.__sock.connect(self.__address)
         except EOFError as e:
             print(e)
-            raise Exception('Client was not able to connect.')
+            raise Exception('❌ Client was not able to connect.')
 
     def disconnect(self):
         try:
