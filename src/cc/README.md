@@ -183,7 +183,10 @@ cdef extern from "functions.cc":
         vector[vector[int]] transpose(vector[vector[int]] A)
 ```
 
+❌ Intuitively, it should be `cdef extern from "functions.hpp"` in `functions.pxd`, and the TVM project also includes header files (`.hpp`) in its `.pxi`. However, this causes errors on my Windows computer. Changing it to `.cc` resolves the issue.
+
 ### 2. PYX File (functions.pyx)
+
 The PYX file contains the Python interface implementation:
 
 ```python
@@ -296,7 +299,4 @@ transposed = matrix.transpose(A)
    - Test edge cases and error conditions
    - Verify memory management
 
-|      |      |      |      |
-| ---- | ---- | ---- | ---- |
-|      |      |      |      |
 
